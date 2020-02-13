@@ -1,0 +1,2 @@
+include ':app', ':feature', ':network'
+rootProject.name='Toy'
