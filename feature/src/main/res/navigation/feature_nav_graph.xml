@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/feature_nav_graph"
+    app:startDestination="@id/featureFragment">
+
+    <fragment
+        android:id="@+id/featureFragment"
+        android:name="com.example.feature.views.FeatureFragment"
+        android:label="FeatureFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="app://feature/{name}" />
+        <argument
+            android:name="name"
+            android:defaultValue="''"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

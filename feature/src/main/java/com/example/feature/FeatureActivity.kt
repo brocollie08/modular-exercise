@@ -1,22 +1,17 @@
 package com.example.feature
 
+import android.content.Context
 import android.os.Bundle
-import android.os.Parcelable
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import com.example.network.dependencySource
-import kotlinx.android.synthetic.main.feature_main.*
-import java.io.Serializable
+import kotlinx.coroutines.InternalCoroutinesApi
 
+
+@InternalCoroutinesApi
 class FeatureActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.feature_main)
-
-        val worker = DaggerFeatureComponent.factory().create(
-            dependencySource()
-        ).apiWorker
-
-        text_view.text = worker.getStuff()
     }
 }

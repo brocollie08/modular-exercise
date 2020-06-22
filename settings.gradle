@@ -1,2 +1,3 @@
 include ':app', ':feature', ':network'
 rootProject.name='Toy'
+include ':database'

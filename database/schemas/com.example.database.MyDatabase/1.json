@@ -1,0 +1,40 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "9233211f33584d1186462fcdcab14f1e",
+    "entities": [
+      {
+        "tableName": "EntryDto",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryName` TEXT NOT NULL, `value` REAL NOT NULL, PRIMARY KEY(`entryName`))",
+        "fields": [
+          {
+            "fieldPath": "entryName",
+            "columnName": "entryName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "entryName"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9233211f33584d1186462fcdcab14f1e')"
+    ]
+  }
+}
