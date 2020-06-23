@@ -1,18 +1,17 @@
 package com.example.toy
 
 import android.app.Application
-import android.os.Parcel
-import androidx.fragment.app.FragmentActivity
-import com.example.database.Database
 import com.example.database.DatabaseModule
 import com.example.database.DatabaseSource
 import com.example.database.MyDao
 import com.example.network.APIWorker
 import com.example.network.ApiSource
+import com.example.toy.di.AppComponent
+import com.example.toy.di.DaggerAppComponent
 
 class ToyApplication: Application(), ApiSource, DatabaseSource {
 
-    lateinit var appComponent: AppComponent
+    private lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -22,11 +21,7 @@ class ToyApplication: Application(), ApiSource, DatabaseSource {
         )
     }
 
-    override fun apiWorker(): APIWorker {
-        return appComponent.apiWorker()
-    }
+    override fun apiWorker() = appComponent.apiWorker()
 
-    override fun dao(): MyDao {
-        return appComponent.dao()
-    }
+    override fun dao() = appComponent.dao()
 }

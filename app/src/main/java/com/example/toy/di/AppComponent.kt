@@ -1,11 +1,10 @@
-package com.example.toy
+package com.example.toy.di
 
 import com.example.database.DatabaseModule
 import com.example.database.DatabaseSource
 import com.example.network.ApiSource
 import com.example.network.NetworkModule
 import dagger.Component
-import dagger.Module
 import javax.inject.Singleton
 
 @Singleton
