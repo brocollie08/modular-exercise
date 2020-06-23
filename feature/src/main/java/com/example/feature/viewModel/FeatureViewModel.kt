@@ -52,10 +52,10 @@ class FeatureViewModel @Inject constructor(
 
     fun addNewEntry(entryDto: EntryDto) {
         val entryList = mutableAllEntries.value?.filterIsInstance<EntryDto>() ?: emptyList()
-        mutableAllEntries.value = createEntriesFromList(entryList.toMutableList().also {
-            it.add(entryDto)
+        mutableAllEntries.value = createEntriesFromList(entryList.toMutableList().also { oldList->
+            oldList.find { item -> item.entryName == entryDto.entryName }?.let { oldList.remove(it) }
+            oldList.add(entryDto)
         }.toList())
-        saveSingleEntry(entryDto)
     }
 
     fun saveSingleEntry(entryDto: EntryDto) {

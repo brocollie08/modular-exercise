@@ -28,11 +28,13 @@ class MainFragment: Fragment() {
         val navController = findNavController(this)
 
         launch_button.setOnClickListener {
-            navController.navigate(Uri.parse("app://feature/${name_field.text}"))
-            requireActivity().currentFocus?.run {
-                val imm: InputMethodManager =
-                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(this.windowToken, 0)
+            if (name_field.text.isNotEmpty()) {
+                navController.navigate(Uri.parse("app://feature/${name_field.text}"))
+                requireActivity().currentFocus?.run {
+                    val imm: InputMethodManager =
+                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(this.windowToken, 0)
+                }
             }
         }
     }

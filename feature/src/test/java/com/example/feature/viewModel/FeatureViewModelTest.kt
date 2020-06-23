@@ -249,8 +249,11 @@ class FeatureViewModelTest {
 
             viewModel.calculations.observeForever(mockTripleObserver)
             viewModel.calculate()
+
             verify(featureRepo).calculate(defaultListNoHeaders)
             verify(mockTripleObserver).onChanged(Triple(1f, 1f, 1f))
+
+            viewModel.calculations.removeObserver(mockTripleObserver)
         }
     }
 
@@ -260,6 +263,47 @@ class FeatureViewModelTest {
             val entry = EntryDto("name", 1f, EntryType.SHORT_TERM_LIABILITY, "me")
             viewModel.saveSingleEntry(entry)
             verify(featureRepo, times(1)).addEntry(entry)
+        }
+    }
+
+    @Test
+    fun `addNewEntry with the same name as existing entry replaces existing entry`() {
+        val newEntry = EntryDto("Chequing", 11f, EntryType.CASH_INVESTMENT, userName)
+        runBlockingTest {
+            `when` (featureRepo.loadData(userName)).thenReturn(
+                flow { emit(emptyList<EntryDto>()) }
+            )
+            viewModel.populateTables(userName)
+
+            viewModel.addNewEntry(newEntry)
+
+            assertEquals(defaultList.size, viewModel.allEntries.value?.size)
+            assertTrue((viewModel.allEntries.value?.find { it.classTitle == "Chequing" } as? EntryDto)?.value == 11f)
+        }
+    }
+
+    @Test
+    fun `addNewEntry triggers livedata update with correct value`() {
+        val newEntry = EntryDto("asdf", 11f, EntryType.CASH_INVESTMENT, userName)
+        runBlockingTest {
+            `when` (featureRepo.loadData(userName)).thenReturn(
+                flow { emit(emptyList<EntryDto>()) }
+            )
+            viewModel.populateTables(userName)
+
+            viewModel.allEntries.observeForever(mockEntriesObserver)
+            viewModel.addNewEntry(newEntry)
+
+            val expectedList = defaultList.toMutableList().also {list ->
+                list.add(
+                    list.indexOf(list.find { it is Adder }),
+                    newEntry
+                )
+            }
+            assertEquals(expectedList, viewModel.allEntries.value)
+
+            viewModel.allEntries.removeObserver(mockEntriesObserver)
+
         }
     }
 

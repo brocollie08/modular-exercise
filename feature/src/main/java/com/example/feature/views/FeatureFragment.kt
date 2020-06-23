@@ -113,7 +113,10 @@ class FeatureFragment: Fragment() {
                         item.type,
                         viewModel.currentUser?: ""
                     )
-                    viewModel.addNewEntry(entry)
+                    viewModel.run {
+                        addNewEntry(entry)
+                        saveSingleEntry(entry)
+                    }
                 }
             }
         }.create()
