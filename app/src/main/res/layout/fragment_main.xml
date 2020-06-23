@@ -9,8 +9,10 @@
         android:id="@+id/name_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:hint="Enter Your Name Here"/>

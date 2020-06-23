@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "2883360b1a4247503f4263948ad64aac",
+    "identityHash": "ebb2acbf37ef7a7a7b3d524172ac38bc",
     "entities": [
       {
         "tableName": "entries",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `entryName` TEXT NOT NULL, `value` REAL, `type` TEXT, `owner` TEXT, `classTitle` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `entryName` TEXT NOT NULL, `value` REAL, `type` TEXT, `owner` TEXT NOT NULL, `classTitle` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "entryId",
@@ -36,7 +36,7 @@
             "fieldPath": "owner",
             "columnName": "owner",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "classTitle",
@@ -68,7 +68,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2883360b1a4247503f4263948ad64aac')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ebb2acbf37ef7a7a7b3d524172ac38bc')"
     ]
   }
 }

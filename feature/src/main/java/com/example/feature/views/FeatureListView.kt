@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
@@ -21,7 +22,7 @@ class FeatureListView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     fun updateList(entryList: List<MySealedClass>?) {
-        (adapter as? FeatureListAdapter)?.submitList(entryList)
+        (adapter as? FeatureListAdapter)?.submitList(entryList?.toMutableList())
     }
 
     fun updateCalculations(assetLiabilityNet: Triple<Float, Float, Float>) {
@@ -29,12 +30,16 @@ class FeatureListView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 }
 
-class FeatureListAdapter(private val listener: View.OnFocusChangeListener) :
-    ListAdapter<MySealedClass, FeatureListAdapter.EntryViewHolder>(EntryDiffCallback()) {
+class FeatureListAdapter(
+    private val listener: View.OnFocusChangeListener,
+    private val addClickListener: AddClickListener,
+    private val longClickListener: View.OnLongClickListener
+) : ListAdapter<MySealedClass, FeatureListAdapter.EntryViewHolder>(EntryDiffCallback()) {
 
     private val HEADER = 0
     private val ENTRY = 1
     private val FOOTER = 2
+    private val ADDER = 3
 
     fun updateCalculations(results: Triple<Float, Float, Float>) {
         Log.d("+++", "${results.first}  ${results.second}  ${results.third}")
@@ -54,14 +59,16 @@ class FeatureListAdapter(private val listener: View.OnFocusChangeListener) :
             is MySealedClass.Header -> HEADER
             is MySealedClass.EntryDto -> ENTRY
             is MySealedClass.Footer -> FOOTER
+            is MySealedClass.Adder -> ADDER
         }
     }
 
     override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
         when (val currentItem = currentList[position]) {
             is MySealedClass.Header -> {holder.bind(currentItem)}
-            is MySealedClass.EntryDto -> {holder.bind(currentItem, listener)}
+            is MySealedClass.EntryDto -> {holder.bind(currentItem, listener, longClickListener)}
             is MySealedClass.Footer -> {holder.bind(currentItem)}
+            is MySealedClass.Adder -> {holder.bind(currentItem, addClickListener)}
         }
     }
 
@@ -75,9 +82,13 @@ class FeatureListAdapter(private val listener: View.OnFocusChangeListener) :
                 EntryViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
                     R.layout.entry_entry_layout,
                     parent, false))}
-           FOOTER -> {
+            FOOTER -> {
                 EntryViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
                     R.layout.entry_footer_layout,
+                    parent, false))}
+            ADDER -> {
+                EntryViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
+                    R.layout.entry_adder_layout,
                     parent, false))}
 
             else -> {
@@ -91,15 +102,23 @@ class FeatureListAdapter(private val listener: View.OnFocusChangeListener) :
             (binding as EntryHeaderLayoutBindingImpl).headerData = item
         }
 
-        fun bind(item: MySealedClass.EntryDto, listener: View.OnFocusChangeListener) {
+        fun bind(item: MySealedClass.EntryDto, listener: View.OnFocusChangeListener, longClick: View.OnLongClickListener) {
             (binding as EntryEntryLayoutBindingImpl).run {
                 entryData = item
                 focusListener = listener
+                root.setOnLongClickListener(longClick)
             }
         }
 
         fun bind(item: MySealedClass.Footer) {
             (binding as EntryFooterLayoutBindingImpl).footerData = item
+        }
+
+        fun bind(item: MySealedClass.Adder, listener: AddClickListener) {
+            (binding as EntryAdderLayoutBindingImpl).run {
+                adderData = item
+                clickListener = listener
+            }
         }
     }
 

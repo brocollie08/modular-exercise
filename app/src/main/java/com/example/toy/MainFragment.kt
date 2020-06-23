@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
@@ -34,6 +35,11 @@ class MainFragment: Fragment() {
                 imm.hideSoftInputFromWindow(this.windowToken, 0)
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
     }
 
 }

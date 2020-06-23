@@ -111,4 +111,26 @@ class DatabaseTest {
             assertEquals(0, userSize)
         }
     }
+
+    @Test
+    fun `delete single entry correctly deletes data`() {
+        runBlocking {
+            myDao.saveUserData(defaultListNoHeaders)
+            myDao.deleteSingleEntry("user", "Chequing")
+            val userData = myDao.getUserData("user")
+            val userSize = userData.size
+            assertEquals(defaultListNoHeaders.size-1, userSize)
+            assertTrue(!userData.contains(EntryDto("Chequing", 0f, EntryType.CASH_INVESTMENT, "user")))
+        }
+    }
+
+    @Test
+    fun `delete single entry does not remove same-named entries from other users`() {
+        runBlocking {
+            myDao.saveUserData(defaultListNoHeaders)
+            myDao.deleteSingleEntry("james", "Chequing")
+            val userSize = myDao.getUserData("user").size
+            assertEquals(defaultListNoHeaders.size, userSize)
+        }
+    }
 }

@@ -16,7 +16,7 @@ fun EditText.onFocusRemoved(listener: View.OnFocusChangeListener) {
 @BindingAdapter("android:onEditorEnterAction")
 fun EditText.onEditorEnterAction(dummy: String?) {
     setOnEditorActionListener { view, actionId, _ ->
-        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
             clearFocus()
             val imm: InputMethodManager =
                 view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

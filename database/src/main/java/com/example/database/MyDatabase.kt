@@ -29,4 +29,7 @@ interface MyDao {
 
     @Query("DELETE FROM entries WHERE owner = :user")
     suspend fun deleteUserData(user: String)
+
+    @Query("DELETE FROM entries WHERE owner = :user AND entryName = :entryName")
+    suspend fun deleteSingleEntry(user: String, entryName: String)
 }

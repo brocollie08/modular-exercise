@@ -145,4 +145,22 @@ class FeatureRepoTest {
             verify(mDao, times(1)).saveUserData(list)
         }
     }
+
+    @Test
+    fun `addEntry triggers database insert on given entry`() {
+        val entry = EntryDto("name", 1f, EntryType.LONG_TERM_ASSET, "me")
+        runBlockingTest {
+            repo.addEntry(entry)
+            verify(mDao, times(1)).insert(entry)
+        }
+    }
+
+    @Test
+    fun `removeEntry triggers database delete call with correct parameters`() {
+        val entry = EntryDto("name", 1f, EntryType.LONG_TERM_ASSET, "me")
+        runBlockingTest {
+            repo.removeEntry(entry)
+            verify(mDao, times(1)).deleteSingleEntry("me", "name")
+        }
+    }
 }

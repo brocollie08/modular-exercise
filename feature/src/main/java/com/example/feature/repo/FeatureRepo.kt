@@ -14,7 +14,13 @@ class FeatureRepo @Inject constructor(
     private val userDao: MyDao
 ) {
 
-    //fun addEntry()
+    suspend fun addEntry(entryDto: EntryDto) {
+        userDao.insert(entryDto)
+    }
+
+    suspend fun removeEntry(entryDto: EntryDto) {
+        userDao.deleteSingleEntry(entryDto.owner, entryDto.entryName)
+    }
 
     suspend fun saveData(data: List<EntryDto>?) {
         data?.run {

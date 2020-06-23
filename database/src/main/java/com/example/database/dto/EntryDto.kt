@@ -30,7 +30,7 @@ sealed class MySealedClass(var classTitle: String) {
         var entryName: String = "",
         var value: Float?,
         var type: EntryType?,
-        var owner: String?
+        var owner: String = ""
     ): MySealedClass(entryName) {
         @PrimaryKey(autoGenerate = true)
         var entryId: Int = 0
@@ -39,5 +39,10 @@ sealed class MySealedClass(var classTitle: String) {
     data class Footer(
         val title: String,
         var value: Float?
+    ): MySealedClass(title)
+
+    data class Adder(
+        val title: String,
+        var type: EntryType
     ): MySealedClass(title)
 }
