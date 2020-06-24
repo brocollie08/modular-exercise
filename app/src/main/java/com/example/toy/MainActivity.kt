@@ -14,9 +14,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        tool_bar.run {
-            setSupportActionBar(tool_bar)
-            title = getString(R.string.app_name)
-        }
+        setSupportActionBar(tool_bar)
     }
 }

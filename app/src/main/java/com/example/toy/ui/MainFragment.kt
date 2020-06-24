@@ -39,9 +39,7 @@ class MainFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(
-            R.string.app_name
-        )
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
     }
 
 }
