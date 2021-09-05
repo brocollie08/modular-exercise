@@ -28,6 +28,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.junit.MockitoRule
 
 
+/*
 @ExperimentalCoroutinesApi
 @FlowPreview
 @RunWith(MockitoJUnitRunner::class)
@@ -163,4 +164,4 @@ class FeatureRepoTest {
             verify(mDao, times(1)).deleteSingleEntry("me", "name")
         }
     }
-}
+}*/

@@ -29,6 +29,7 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.junit.MockitoRule
 
+/*
 @ExperimentalCoroutinesApi
 @InternalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
@@ -315,4 +316,4 @@ class FeatureViewModelTest {
             verify(featureRepo, times(1)).removeEntry(entry)
         }
     }
-}
+}*/
