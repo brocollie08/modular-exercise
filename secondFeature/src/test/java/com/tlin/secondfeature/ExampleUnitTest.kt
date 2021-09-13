@@ -1,4 +1,4 @@
-package com.example.feature
+package com.tlin.secondfeature
 
 import org.junit.Test
 

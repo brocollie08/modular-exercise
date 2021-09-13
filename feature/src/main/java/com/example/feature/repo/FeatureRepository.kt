@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class FeatureRepo @Inject constructor(
+class FeatureRepository @Inject constructor(
     private val apiWorker: APIWorker,
     private val userDao: MyDao
 ) {

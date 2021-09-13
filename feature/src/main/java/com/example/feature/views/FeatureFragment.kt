@@ -52,7 +52,7 @@ class FeatureFragment: Fragment() {
         )
 
         feature_list.adapter = FeatureListAdapter(
-            View.OnFocusChangeListener { v, focused ->
+            { v, focused ->
                 if (!focused) {
                     viewModel.calculate()
                     DataBindingUtil.findBinding<EntryEntryLayoutBinding>(v)?.entryData?.run {
@@ -65,7 +65,7 @@ class FeatureFragment: Fragment() {
                     showAddDialog(item)
                 }
             },
-            View.OnLongClickListener {
+            {
                 DataBindingUtil.findBinding<EntryEntryLayoutBinding>(it)?.entryData?.run {
                     showRemoveDialog(this)
                 }

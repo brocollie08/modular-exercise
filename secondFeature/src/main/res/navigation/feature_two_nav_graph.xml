@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/feature_two_nav_graph"
+    app:startDestination="@id/featureTwoFragment">
+
+    <fragment
+        android:id="@+id/featureTwoFragment"
+        android:name="com.tlin.secondfeature.views.FeatureTwoFragment"
+        android:label="FeatureTwoFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="app://featureTwo" />
+        <action
+            android:id="@+id/action_featureTwoFragment_to_resultFragment"
+            app:destination="@id/resultFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.tlin.secondfeature.views.ResultFragment"
+        android:label="ResultFragment">
+        <argument
+            android:name="colorNum"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="perColor"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="numPick"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="numRun"
+            app:argType="integer"
+            android:defaultValue="-1" />
+
+    </fragment>
+
+</navigation>

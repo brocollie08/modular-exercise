@@ -3,8 +3,6 @@ package com.example.toy
 import android.app.Application
 import com.example.database.DatabaseModule
 import com.example.database.DatabaseSource
-import com.example.database.MyDao
-import com.example.network.APIWorker
 import com.example.network.ApiSource
 import com.example.toy.di.AppComponent
 import com.example.toy.di.DaggerAppComponent

@@ -1,19 +1,19 @@
-package com.example.feature.viewModel
+package com.tlin.secondfeature.viewModel
 
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.example.feature.repo.FeatureRepository
+import com.tlin.secondfeature.repo.SecondFeatureRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.InternalCoroutinesApi
 import javax.inject.Inject
 
 @InternalCoroutinesApi
 @Suppress("UNCHECKED_CAST")
-class FeatureViewModelFactory @Inject constructor(
+class SecondFeatureViewModelFactory @Inject constructor(
     private val coroutineScope: CoroutineScope,
-    private val featureRepo: FeatureRepository,
+    private val secondFeatureRepo: SecondFeatureRepo,
     registryOwner: SavedStateRegistryOwner
 ): AbstractSavedStateViewModelFactory(registryOwner, null) {
     override fun <T : ViewModel?> create(
@@ -22,7 +22,7 @@ class FeatureViewModelFactory @Inject constructor(
         handle: SavedStateHandle
     ): T {
         return when (modelClass) {
-            FeatureViewModel::class.java -> FeatureViewModel(coroutineScope, featureRepo, handle) as T
+            FeatureTwoViewModel::class.java -> FeatureTwoViewModel(coroutineScope, secondFeatureRepo, handle) as T
             else -> null as T
         }
     }

@@ -1,12 +1,10 @@
 package com.example.feature.viewModel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.database.dto.MySealedClass.*
 import com.example.database.dto.EntryType
 import com.example.database.dto.MySealedClass
-import com.example.feature.repo.FeatureRepo
-import com.example.network.APIWorker
+import com.example.feature.repo.FeatureRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -14,7 +12,7 @@ import javax.inject.Inject
 @InternalCoroutinesApi
 class FeatureViewModel @Inject constructor(
     private val coroutineScope: CoroutineScope,
-    private val featureRepo: FeatureRepo,
+    private val featureRepo: FeatureRepository,
     private val stateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -39,7 +37,7 @@ class FeatureViewModel @Inject constructor(
         (user ?: currentUser)?.run {
             stateHandle.set(USER, this)
             viewModelScope.launch(coroutineScope.coroutineContext) {
-                featureRepo.loadData(this@run).collect {entries ->
+                featureRepo.loadData(this@run).collect { entries ->
                     if (entries.isNotEmpty()) {
                         mutableAllEntries.postValue(createEntriesFromList(entries))
                     } else {

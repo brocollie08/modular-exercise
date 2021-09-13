@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/colors_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="How many colors are there"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/per_color_input"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="243dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/per_color_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="How many balls are there per color"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/num_picked_input"
+        app:layout_constraintTop_toBottomOf="@+id/colors_input"
+        tools:layout_editor_absoluteX="194dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/num_picked_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="How many balls will be picked"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/num_run_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/per_color_input" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/num_run_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="How many times will the simulation run"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/calculate_button"
+        app:layout_constraintTop_toBottomOf="@+id/num_picked_input"
+        tools:layout_editor_absoluteX="167dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/calculate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="calculate"
+        app:layout_constraintBottom_toTopOf="@+id/get_runs_button"
+        app:layout_constraintTop_toBottomOf="@+id/num_run_input"
+        tools:layout_editor_absoluteX="355dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/get_runs_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="99%"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calculate_button"
+        tools:layout_editor_absoluteX="385dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

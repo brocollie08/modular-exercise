@@ -35,6 +35,9 @@ class MainFragment: Fragment() {
                 }
             }
         }
+        second_feature_launch.setOnClickListener {
+            navController.navigate(Uri.parse("app://featureTwo"))
+        }
     }
 
     override fun onStart() {
